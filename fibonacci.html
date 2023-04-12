@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+    />
+    <title>Entregável2</title>
+  </head>
+
+  <body font face="Arial"></font> <br />
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Ambientes desenv de software</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          
+        </div>
+      </div>
+    </nav>
+
+    <div class="container my-3">
+      <h1>Fibonacci</h1>
+
+      <form>
+        <label for="num_terms">Digite a quantidade de termos: </label>
+        <input type="number" id="num_terms" name="num_terms" min="1" required />
+        <button
+          type="button"
+          class="btn btn-primary"
+          onclick="calculateFibonacci()"
+        >
+          Calcular
+        </button>
+      </form>
+
+      <ul id="fibonacci_sequence"></ul>
+
+      <script>   
+      const fibonacci = (n, cache = {}) => {
+        if (n < 2) {
+          return n;
+        }
+        if (n in cache) {
+          return cache[n];
+        }
+        cache[n] = fibonacci(n - 1, cache) + fibonacci(n - 2, cache);
+        return cache[n];
+      };
+      
+      const calculateFibonacci = () => {
+        const numTerms = parseInt(document.getElementById("num_terms").value);
+        let fibonacciSequence = [];
+        for (let i = 1; i < numTerms + 1; i++) {
+          fibonacciSequence.push(fibonacci(i));
+        }
+        const fibonacciList = document.getElementById("fibonacci_sequence");
+        fibonacciList.innerHTML = "";
+        for (let i = 0; i < fibonacciSequence.length; i++) {
+          const listItem = document.createElement("li");
+          listItem.textContent = `Termo ${i} : ${fibonacciSequence[i]}`;
+          fibonacciList.appendChild(listItem);
+        }
+      };
+      </script>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+  </body>
+</html>
